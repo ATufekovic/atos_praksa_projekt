@@ -2,19 +2,19 @@ var app = angular.module("chatApp", ['ngRoute']);
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
-            templateUrl: "login.html",
+            templateUrl: "views/login.html",
             controller : "loginCtrl"
         })
         .when("/login", {
-            templateUrl: "login.html",
+            templateUrl: "views/login.html",
             controller : "loginCtrl"
         })
         .when("/register", {
-            templateUrl : "register.html",
+            templateUrl : "views/register.html",
             controller : "registerCtrl"
         })
         .when("/chat", {
-            templateUrl : "chat.html",
+            templateUrl : "views/chat.html",
             controller : "chatCtrl"
         });
     
