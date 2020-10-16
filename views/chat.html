@@ -1,3 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  
 <div class="container-fluid">
-    
+  <div class="row">
+    <div class="col-sm-3 container p-3 my-3 bg-dark text-white">
+      <img class="rounded-circle img-fluid" src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg" alt="randomPic">
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th ng-click="slikaChange()">Username</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in users">
+            <td>{{ x.username }} {{ x.email }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-9 container p-3 my-3 text-black">
+      <form form name="myForm">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" ng-show="chatText"></textarea>
+
+      <img class="img-fluid" src="https://www.userlike.com/api/proxy/resize/benefits-of-live-chat/chat-benefits.png?height=720" alt="randomPic2" ng-hide="chatText">
+
+      <div class="">
+        <p ng-show="chatText"><strong>Text here:</strong></p>
+      </div>
+      <nav class="navbar d-flex">
+        <div class="p-1 mr-auto flex-grow-1 input-group-lg">
+            <input type="text" class="form-control" id="usr" name="inputText" ng-show="chatText" ng-model="inputText" required>
+      </div>
+        <div class="">
+            <button type="button" class="btn btn-primary" ng-show="chatText" ng-disabled="myForm.inputText.$invalid">Send</button>
+        </div>
+      </nav>
+      
+    </form>
+    </div>
 </div>
+
+</body>
+</html>
