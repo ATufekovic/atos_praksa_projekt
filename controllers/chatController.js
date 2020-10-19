@@ -34,6 +34,7 @@ angular.module("chatApp").controller("chatCtrl", function($scope, usernameStorag
             return;
         }
         client.send("/topic/test", {"content-type":"text/plain"}, message);
+        $scope.inputText = "";
         //TODO: set up exchange somewhere
     }
 
