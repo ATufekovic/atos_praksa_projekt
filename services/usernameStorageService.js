@@ -1,10 +1,10 @@
 angular.module("chatApp").service("usernameStorage", function(){
     this.username = "";
 
-    this.getName = function() {
+    this.getUsername = function() {
         return this.username;
     }
-    this.setName = function(newName) {
+    this.setUsername = function(newName) {
         this.username = newName;
         return;
     }
