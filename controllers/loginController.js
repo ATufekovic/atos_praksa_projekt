@@ -1,11 +1,14 @@
 angular.module("chatApp").controller("loginCtrl", function($scope, usernameStorage, $location, $http) {
-
+    
 
     $scope.login = function() {
-        $scope.users = [];
-    }
+        //$scope.users = [];
+        usernameStorage.setUsername($scope.username);
+        usernameStorage.setPassword($scope.password);
+        $location.path("chat");
+    };
 
-    function _getUsers() {
+    /* function _getUsers() {//big nono
         $http({
             method : 'GET',
             url : 'ovdje_ide_url'
@@ -14,7 +17,7 @@ angular.module("chatApp").controller("loginCtrl", function($scope, usernameStora
         }, function errorCallback(response) {
             console.log(response.statusText);
         });
-    }
+    }; */
 
 
     //funkcijaZaUsporedivanjeLoginaSUserima

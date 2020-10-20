@@ -21,7 +21,11 @@
                 <table class="table table-dark table-striped">
                     <thead>
                         <tr>
-                            <th ng-click="slikaChange()">Username</th>
+                            <th ng-bind="profileUsername">Username</th>
+                            <th ng-bind="chosenUsername"></th>
+                        </tr>
+                        <tr>
+                            <th ng-click="profileChange()">Username</th>
                             <th>Email</th>
                         </tr>
                     </thead>

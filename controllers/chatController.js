@@ -1,23 +1,30 @@
 angular.module("chatApp").controller("chatCtrl", function($scope, usernameStorage) {
-    //$scope.username = usernameStorage.getName();
+
+    $scope.username = usernameStorage.getUsername();
+    $scope.profileUsername = $scope.username;
+
+    $scope.chosenUsername = "null";//TODO: change
+    $scope.chosenUsername = usernameStorage.getPassword();
+
     $scope.chatText=false;
-    $scope.slikaChange=function(){
+
+    $scope.profileChange=function(){
         $scope.chatText=true;
     }
 
     
-    var ws = new WebSocket("ws://127.0.0.1:15674/ws");
+    var ws = new WebSocket("ws://127.0.0.1:5673/ws");
     var client = Stomp.over(ws);
 
     var on_connect = function(){
-        id = client.subscribe("/topic/test", function(m){
+        id = client.subscribe("/topic/" + $scope.chosenUsername + "-" + $scope.profileUsername, function(m){
             if($scope.chatHistory == undefined){
                 $scope.chatHistory = m.body + "\n";
             } else{
                 $scope.chatHistory += m.body + "\n";
             }
 
-            $scope.$apply();
+            $scope.$apply();//refresh MVC to display data properly, otherwise it would lag for one message
         });
     }
 
@@ -33,7 +40,7 @@ angular.module("chatApp").controller("chatCtrl", function($scope, usernameStorag
         if(message == undefined){
             return;
         }
-        client.send("/topic/test", {"content-type":"text/plain"}, message);
+        client.send("/topic/" + $scope.profileUsername + "-" + $scope.chosenUsername, {"content-type":"text/plain"}, message);
         $scope.inputText = "";
         //TODO: set up exchange somewhere
     }
