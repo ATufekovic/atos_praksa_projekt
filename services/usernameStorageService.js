@@ -1,6 +1,6 @@
 angular.module("chatApp").service("usernameStorage", function(){
-    this.username = "";
-    this.password = "";
+    this.username = "default";
+    this.password = "default";
 
     this.getUsername = function() {
         //console.log("Username called: " + this.username);
