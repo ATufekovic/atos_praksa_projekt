@@ -16,14 +16,21 @@
                                     <span style="color:red" ng-show="myForm.username.$dirty && myForm.username.$invalid">
                                     <span ng-show="myForm.username.$error.required">Username is required.</span>
                                     </span>
+                                    <span style="color:red" ng-show="myForm.username.$dirty && usernameWrongInput">
+                                    <span ng-show="usernameWrongInput">Username can only contain letters, numbers, and underscores, and must be between 6 and 50 characters long.</span>
+                                    </span>
+                                        
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="password">Password:</label>
-                                    <input type="password" class="form-control" name="password" value="" ng-model="password" required autocomplete="new-password">
+                                    <input type="password" class="form-control" name="password" value="" ng-model="password" required>
                                     <span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
                                     <span ng-show="myForm.password.$error.required">Password is required.</span>
+                                    </span>
+                                    <span style="color:red" ng-show="myForm.password.$dirty && passwordWrongInput">
+                                    <span ng-show="passwordWrongInput">Password must be at least 8 characters long and contain: 1 lower case letter, 1 upper case letter, 1 numeric character.</span>
                                     </span>
                                 </div>
                             </div>
@@ -32,10 +39,12 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">E-mail:</label>
-                                    <input type="email" class="form-control" name="email" value="" ng-model="email" required autocomplete="email">
+                                    <input type="email" class="form-control" name="email" value="" ng-model="email" required>
                                     <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
                                     <span ng-show="myForm.email.$error.required">Email is required.</span>
-                                    <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+                                    </span>
+                                    <span style="color:red" ng-show="myForm.email.$dirty && emailWrongInput">
+                                    <span ng-show="emailWrongInput">Email is invalid</span>
                                     </span>
                                 </div>
                             </div>
@@ -43,11 +52,14 @@
                                 <div class="form-group">
                                     <label for="password">Confirm password:</label>
                                     <input type="password" class="form-control" name="passwordConfirm" value="" ng-model="passwordConfirm">
+                                    <span style="color:red" ng-show="error">
+                                    <span ng-show="emailWrongInput">Passwords must match</span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <button type="button" class="btn btn-primary" ng-click="register()" ng-disabled="myForm.username.$invalid ||
-                        myForm.email.$invalid || myForm.password.$invalid || error">Register</button>
+                        myForm.email.$invalid || myForm.password.$invalid || error || usernameWrongInput || passwordWrongInput || emailWrongInput">Register</button>
                     </form>
                 </div>
                 <div class="card-footer">
