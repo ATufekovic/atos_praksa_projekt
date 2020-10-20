@@ -12,6 +12,7 @@ angular.module("chatApp").service("usernameStorage", function(){
         return;
     }
 
+    //TODO: secure password storage, hashed?
     this.getPassword = function(){
         return this.password;
     }
