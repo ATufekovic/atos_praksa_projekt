@@ -1,6 +1,7 @@
 angular.module("chatApp").controller("chatCtrl", function ($scope, usernameStorage) {
     $scope.username = usernameStorage.getUsername();
     //TODO: change a lot of things
+    $scope.chosenUsername = "default";
     $scope.chosenUsername = usernameStorage.getPassword();
 
     $scope.ws = undefined;
@@ -39,7 +40,7 @@ angular.module("chatApp").controller("chatCtrl", function ($scope, usernameStora
             subscribeClient();
         };
         var subscribeClient = function(){
-            $scope.id = $scope.client.subscribe("/topic/" + $scope.chosenUsername + "-" + $scope.profileUsername, function (m) {
+            $scope.id = $scope.client.subscribe("/topic/" + $scope.chosenUsername + "-" + $scope.username, function (m) {
                 if ($scope.chatHistory == undefined) {
                     $scope.chatHistory = "[" + $scope.chosenUsername + "]: " + m.body + "\n";
                 } else {
@@ -68,7 +69,7 @@ angular.module("chatApp").controller("chatCtrl", function ($scope, usernameStora
             if (message == undefined || message == "") {
                 return;
             }
-            $scope.client.send("/topic/" + $scope.profileUsername + "-" + $scope.chosenUsername, { "content-type": "text/plain" }, message);
+            $scope.client.send("/topic/" + $scope.username + "-" + $scope.chosenUsername, { "content-type": "text/plain" }, message);
             $scope.inputText = "";
 
             if ($scope.chatHistory == undefined) {
