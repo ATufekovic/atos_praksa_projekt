@@ -1,8 +1,6 @@
 angular.module("chatApp").controller("chatCtrl", function ($scope, usernameStorage) {
     $scope.username = usernameStorage.getUsername();
-    $scope.profileUsername = $scope.username;
-
-    $scope.chosenUsername = "null";//TODO: change a lot of things
+    //TODO: change a lot of things
     $scope.chosenUsername = usernameStorage.getPassword();
 
     $scope.ws = undefined;
