@@ -41,7 +41,7 @@
             <div class="col-sm-9 container p-3 text-black">
                 <form form name="myForm" ng-submit="send()">
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" ng-show="chatText"
-                        ng-model="chatHistory" value=" " readonly style="resize:none;"></textarea>
+                        ng-model="chatHistory" value=" " readonly style="resize:none;" #textarea [scrollTop]="textarea.scrollHeight" show-tail></textarea>
 
                     <img class="img-fluid"
                         src="https://www.userlike.com/api/proxy/resize/benefits-of-live-chat/chat-benefits.png?height=720"

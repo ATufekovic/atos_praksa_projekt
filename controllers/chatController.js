@@ -26,7 +26,7 @@ angular.module("chatApp").controller("chatCtrl", function ($scope, usernameStora
 
     $scope.initClient = function () {
         if ($scope.isFirstTime) {
-            $scope.ws = new WebSocket("ws://127.0.0.1:15674/ws");//15674 is the WebStomp port
+            $scope.ws = new WebSocket("ws://192.168.1.184:15674/ws");//15674 is the WebStomp port
             $scope.client = Stomp.over($scope.ws);
             $scope.isFirstTime = false;
             $scope.connectClient();
@@ -35,17 +35,29 @@ angular.module("chatApp").controller("chatCtrl", function ($scope, usernameStora
         }
     };
 
+    $scope.addToChatHistory = function(newText){
+        if($scope.chatHistory == undefined){
+            $scope.chatHistory = newText + "\n";
+        } else {
+            $scope.chatHistory += newText + "\n";
+        }
+        
+        $scope.chatHistory.scrollTop = $scope.chatHistory.scrollHeight;
+    };
+
     $scope.connectClient = function () {
         var on_connect = function () {
             subscribeClient();
         };
         var subscribeClient = function(){
             $scope.id = $scope.client.subscribe("/topic/" + $scope.chosenUsername + "-" + $scope.username, function (m) {
+                $scope.addToChatHistory("[" + $scope.chosenUsername + "]: " + m.body);
+                /* 
                 if ($scope.chatHistory == undefined) {
                     $scope.chatHistory = "[" + $scope.chosenUsername + "]: " + m.body + "\n";
                 } else {
                     $scope.chatHistory += "[" + $scope.chosenUsername + "]: " + m.body + "\n";
-                }
+                } */
 
                 $scope.$apply();//refresh MVC to display data properly, otherwise it would lag for one message
             });
@@ -72,12 +84,17 @@ angular.module("chatApp").controller("chatCtrl", function ($scope, usernameStora
             $scope.client.send("/topic/" + $scope.username + "-" + $scope.chosenUsername, { "content-type": "text/plain" }, message);
             $scope.inputText = "";
 
-            if ($scope.chatHistory == undefined) {
+            $scope.addToChatHistory(">>" + message);
+			
+			var textarea = document.getElementById('exampleFormControlTextarea1');
+            textarea.scrollTop = textarea.scrollHeight;
+
+            /* if ($scope.chatHistory == undefined) {
                 $scope.chatHistory = ">>" + message + "\n";
             } else {
                 $scope.chatHistory += ">>" + message + "\n";
-            }
-            //TODO: set up exchange somewhere
+            } */
+            //TODO: set up exchange somewhere?
         };
     };
 });
